@@ -13,7 +13,7 @@ export class InfoComponent implements OnInit {
 
   turn_player:number = -1;
   ngOnInit(): void {
-    this.coreService.current_turn.subscribe(player => {
+    this.coreService.current_turn_obs.subscribe(player => {
       console.log(player)
       this.turn_player = player
     })

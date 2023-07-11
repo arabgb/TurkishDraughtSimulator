@@ -1,16 +1,6 @@
 <div id="main-container">
 
   <app-info></app-info>
-  <div id="game-container">
-    <table id="game-table">
-      <tr *ngFor="let r1 of repeatByNumber(game.mainRule.row); let r= index">
-        <td *ngFor="let c1 of repeatByNumber(game.mainRule.column); let c= index"> <app-wood [square]="getSquare(r,c)"  (clicked)="onSquareClicked($event)"></app-wood> </td>
-      </tr>
-    </table>
+  <app-board></app-board>
 
-
-  </div>
-  <div id="controller-container">
-
-  </div>
 </div>
