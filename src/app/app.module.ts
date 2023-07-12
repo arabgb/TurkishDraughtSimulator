@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { WoodComponent } from './componenets/wood/wood.component';
-import { CoreService } from './core/core.service';
+import { GameService } from './core/game.service';
 import { InfoComponent } from './componenets/info/info.component';
 import { BoardComponent } from './componenets/board/board.component';
 import { ControllerComponent } from './componenets/controller/controller.component';
@@ -19,7 +19,7 @@ import { ControllerComponent } from './componenets/controller/controller.compone
   imports: [
     BrowserModule
   ],
-  providers: [CoreService],
+  providers: [GameService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

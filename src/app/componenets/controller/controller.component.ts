@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CoreService } from 'src/app/core/core.service';
+import { GameService } from 'src/app/core/game.service';
 
 @Component({
   selector: 'app-controller',
@@ -8,13 +8,13 @@ import { CoreService } from 'src/app/core/core.service';
 })
 export class ControllerComponent implements OnInit {
 
-  constructor(private coreService : CoreService) { }
+  constructor(private gameService : GameService) { }
 
   ngOnInit(): void {
   }
 
   restart() {
-    this.coreService.restart();
+    this.gameService.restart();
   }
 
 }

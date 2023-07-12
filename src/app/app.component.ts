@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CoreService } from './core/core.service';
+import { GameService } from './core/game.service';
 import { SquireInterface } from './core/interfaces/square.interface';
 
 @Component({
@@ -10,7 +10,7 @@ import { SquireInterface } from './core/interfaces/square.interface';
 export class AppComponent {
   title = 'TurkishDraughtSimulator';
 
-  constructor (private coreService : CoreService) {}
+  constructor (private gameService : GameService) {}
 
 
 

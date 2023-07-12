@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CoreService } from 'src/app/core/core.service';
+import { GameService } from 'src/app/core/game.service';
 import { SquireInterface } from 'src/app/core/interfaces/square.interface';
 
 @Component({
@@ -11,8 +11,8 @@ export class BoardComponent implements OnInit {
 
   squares : SquireInterface[][] = [];
 
-  constructor(private coreService : CoreService) {
-    this.coreService.squares_obs.subscribe(squares => {
+  constructor(private gameService : GameService) {
+    this.gameService.squares_obs.subscribe(squares => {
       this.squares = squares;
     })
    }
@@ -25,7 +25,7 @@ export class BoardComponent implements OnInit {
   }
 
   onSquareClicked(square: SquireInterface) {
-    this.coreService.squareClicked(square);
+    this.gameService.squareClicked(square);
   }
 
 }

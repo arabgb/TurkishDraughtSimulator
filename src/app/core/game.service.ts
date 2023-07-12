@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { SquireInterface } from './interfaces/square.interface';
 import { BehaviorSubject } from "rxjs";
 import { eatPossibble } from './eat.posibble';
+import { isMovingForward, moveDirection, numOfSteps } from './core';
 @Injectable({
   providedIn: 'root'
 })
-export class CoreService {
+export class GameService {
 
 
   private squares : SquireInterface[][] = [];
@@ -41,9 +42,6 @@ export class CoreService {
   }
 
 
-  getSquare(row: number, column: number) : SquireInterface {
-    return this.squares[row][column];
-  }
 
   squareClicked(square : SquireInterface) {
 
@@ -82,23 +80,21 @@ export class CoreService {
 
 
   moveWood(from : SquireInterface, to: SquireInterface) {
-
     // for now, its meen we can move
     if (to.player == -1) {
-
       // check if the new square is in same row or column
       if (from.row == to.row || from.column == to.column) {
 
-        const numOfSteps = this.numOfSteps(from,to);
+        const nOfSteps = numOfSteps(from,to);
         // if the wood is not king, they cant move more than two step!
-        if (!from.king && numOfSteps <= 2)
+        if (!from.king && nOfSteps <= 2)
         {
           // normal wood cant move back, just check
-          if (this.moveDirection(from,to) == 'y') { // moving in y direction
+          if (moveDirection(from,to) == 'y') { // moving in y direction
             // check if its not go back
-            if (this.isMovingForward(from,to)) {
+            if (isMovingForward(from,to)) {
               
-              if (numOfSteps == 1) { // we are sure he is not eat anything
+              if (nOfSteps == 1) { // we are sure he is not eat anything
                 this.applyMove(from, to);
               }
               else {
@@ -107,7 +103,7 @@ export class CoreService {
             }
           }
           else { // move in x direction,
-            if (numOfSteps == 1) {// we are sure he is not eat anything
+            if (nOfSteps == 1) {// we are sure he is not eat anything
             this.applyMove(from, to);
             }
             else {
@@ -116,25 +112,13 @@ export class CoreService {
           }
           
         }
-        
-        
-       
       }
-
     }
 
   }
 
 
-  // calculate number of steps
-  numOfSteps(from: SquireInterface, to: SquireInterface) : number {
-    if (from.column == to.column) {
-      return Math.abs(from.row - to.row);
-    }
-    else {
-      return Math.abs(from.column - to.column);
-    }
-  }
+  
 
 
   // after calculation, if the player can move, just apply the moving!
@@ -150,35 +134,7 @@ export class CoreService {
   }
 
 
-  isMovingForward(from: SquireInterface, to: SquireInterface) : boolean {
-    if (from.player == 1) {
-      console.log("Is Forward plaer 1: ", (from.row > to.row));
-      
-      return (from.row > to.row)
-    }
-    else {
-      console.log("Is Forward player 2: ", (from.row < to.row));
-      return (from.row < to.row)
-    }
-  }
-
-
-  moveDirection(from: SquireInterface, to: SquireInterface) : string {
-    if (from.row == to.row || from.column == to.column) {
-      if (from.row == to.row) {
-        console.log("Direction x")
-        return "x";
-      }
-      else {
-        console.log("Direction y")
-        return "y";
-      }
-    }
-    else {
-      console.log("Direction unknown")
-      return "Unknown"
-    }
-  }
+  
 
   restart() {
     this.initSquares();
@@ -186,6 +142,7 @@ export class CoreService {
     this.selected_square = null;
   }
 
+  // reset sequare remove player it
   resetSquare(square : SquireInterface) {
     this.squares[square.row][square.column].player = -1
     this.squares[square.row][square.column].selected = false;
@@ -197,7 +154,7 @@ export class CoreService {
   }
   
   tryToEat(from: SquireInterface, to: SquireInterface) {
-    const direction = this.moveDirection(from,to);
+    const direction = moveDirection(from,to);
     let eaten_square: SquireInterface|null = null;
     if (!from.king) {
       if (direction == 'y') {

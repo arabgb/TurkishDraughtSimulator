@@ -1,12 +1,14 @@
 import { SquireInterface } from "./interfaces/square.interface"
 
+
+// To check if the given wood can eat in next play
 const eatPossibble = (wood: SquireInterface, squares: SquireInterface[][]) : boolean => {
 
     let behindSquare : SquireInterface|null = null;
     let nextSquare : SquireInterface| null = null;
-    // check for direction first
+    
     if (!wood.king) {
-        // check in x direction first
+        // check in x direction
         if (wood.column <= 5) { // check right move
             behindSquare = squares[wood.row][wood.column+1];
             nextSquare = squares[wood.row][wood.column+2];
@@ -14,7 +16,7 @@ const eatPossibble = (wood: SquireInterface, squares: SquireInterface[][]) : boo
                 return true;
             }
         }
-
+        // check in x direction
         if (wood.column >= 2) { // check left moving
             behindSquare = squares[wood.row][wood.column-1];
             nextSquare = squares[wood.row][wood.column-2];
@@ -22,7 +24,7 @@ const eatPossibble = (wood: SquireInterface, squares: SquireInterface[][]) : boo
                 return true;
             }
         }
-
+        // check in y direction
         if (wood.player == 1 && wood.row >= 2) { // player 1 move up
             behindSquare = squares[wood.row-1][wood.column];
             nextSquare = squares[wood.row-2][wood.column];
@@ -31,6 +33,7 @@ const eatPossibble = (wood: SquireInterface, squares: SquireInterface[][]) : boo
             }
         }
 
+        // check in y direction
         if (wood.player == 2 && wood.row <= 5) { // player 1 move up
             behindSquare = squares[wood.row+1][wood.column];
             nextSquare = squares[wood.row+2][wood.column];
