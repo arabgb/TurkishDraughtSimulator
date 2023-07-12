@@ -1,7 +1,7 @@
 <div id="board-container">
     <table id="game-table">
       <tr *ngFor="let r1 of repeatByNumber(8); let r= index">
-        <td *ngFor="let c1 of repeatByNumber(8); let c= index"> <app-wood [square]="getSquare(r,c)"  (clicked)="onSquareClicked($event)"></app-wood> </td>
+        <td *ngFor="let c1 of repeatByNumber(8); let c= index"> <app-wood [square]="squares[r][c]"  (clicked)="onSquareClicked($event)"></app-wood> </td>
       </tr>
     </table>
 

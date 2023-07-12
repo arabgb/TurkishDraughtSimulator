@@ -6,13 +6,15 @@ import { WoodComponent } from './componenets/wood/wood.component';
 import { CoreService } from './core/core.service';
 import { InfoComponent } from './componenets/info/info.component';
 import { BoardComponent } from './componenets/board/board.component';
+import { ControllerComponent } from './componenets/controller/controller.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     WoodComponent,
     InfoComponent,
-    BoardComponent
+    BoardComponent,
+    ControllerComponent
   ],
   imports: [
     BrowserModule

@@ -9,17 +9,19 @@ import { SquireInterface } from 'src/app/core/interfaces/square.interface';
 })
 export class BoardComponent implements OnInit {
 
-  constructor(private coreService : CoreService) { }
+  squares : SquireInterface[][] = [];
+
+  constructor(private coreService : CoreService) {
+    this.coreService.squares_obs.subscribe(squares => {
+      this.squares = squares;
+    })
+   }
 
   ngOnInit(): void {
   }
 
   repeatByNumber (n : number): Array<number> {
     return Array(n);
-  }
-
-  getSquare(row : number, column: number) : SquireInterface {
-    return this.coreService.getSquare(row,column);
   }
 
   onSquareClicked(square: SquireInterface) {

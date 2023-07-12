@@ -1,3 +1,11 @@
-<div id="wood" [style.background-color]="(square.player == 1) ? player1.color : (square.player == 2) ? player2.color : ''" (click)="onClick()">
+<div
+  id="wood"
+  [style.background-color]="
+    square.player == 1 ? player1.color : square.player == 2 ? player2.color : ''
+  "
+  
+  (click)="onClick()"
+>
+<div class="selected" *ngIf="square.selected" > </div>
 
 </div>
